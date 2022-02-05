@@ -1,6 +1,5 @@
 import csv
 import heapq
-from DestinationCards import generate_destination_cards
 
 def build_board():
     adj_list = {}
