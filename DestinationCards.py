@@ -7,10 +7,13 @@ class DestinationCard():
         self.v2 = v2
         self.score = score
 
-destination_cards = []
+def generate_destination_cards():
+    destination_cards = []
 
-with open('DestinationCards.csv', newline='') as csv_file:
-    card_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
-    for row in card_reader:
-        entries = row[0].split(',')
-        destination_cards.append(DestinationCard(Destinations[entries[0]], Destinations[entries[1]], entries[2]))
+    with open('DestinationCards.csv', newline='') as csv_file:
+        card_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
+        for row in card_reader:
+            entries = row[0].split(',')
+            destination_cards.append(DestinationCard(entries[0], entries[1], int(entries[2])))
+    
+    return destination_cards
