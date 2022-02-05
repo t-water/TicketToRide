@@ -1,14 +1,13 @@
 import random
+import csv
 
-starting_deck = {
-    "wild": 8,
-    "blue": 6,
-    "green": 6,
-    "black": 6,
-    "pink": 6,
-    "yellow": 6,
-    "orange": 6
-}
+starting_deck = { }
+
+with open('TransportationCards.csv', newline='') as csv_file:
+    card_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
+    for row in card_reader:
+        entries = row[0].split(',')
+        starting_deck[entries[0]] = int(entries[1])
 
 def draw_card():
     deck_cards = [key for key in starting_deck.keys() if starting_deck[key] > 0]
