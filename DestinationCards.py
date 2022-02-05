@@ -24,9 +24,9 @@ class DestinationCardDeck:
     
     def draw(self):
         if len(self.__cards) == 1:
-            return [self.__cards.pop()]
+            return [self.__cards.pop(0)]
         else:
-            return [self.__cards.pop(), self.__cards.pop()]
+            return [self.__cards.pop(0), self.__cards.pop(0)]
     
     def return_card(self, card):
         self.__cards.append(card)

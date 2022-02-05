@@ -1,31 +1,23 @@
 import random
 import csv
 
-starting_deck = { }
+class TransportationCardDeck:
+    def __init__(self):
+        self.__cards = []
+        self.__discard_pile = []
 
-with open('TransportationCards.csv', newline='') as csv_file:
-    card_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
-    for row in card_reader:
-        entries = row[0].split(',')
-        starting_deck[entries[0]] = int(entries[1])
+        with open('TransportationCards.csv', newline='') as csv_file:
+            card_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
 
-def draw_card():
-    deck_cards = [key for key in starting_deck.keys() if starting_deck[key] > 0]
+            for row in card_reader:
+                entry = row[0].split(',')
 
-    if len(deck_cards) > 0:
-        card = random.choice(deck_cards)
-        starting_deck[card] = starting_deck[card] - 1
-        
-        return card
-    else:
-        return None
+                self.__cards.extend([entry[0]] * int(entry[1]))
+            
+            random.shuffle(self.__cards)
 
-def process_deck():
-    drawn_card = draw_card()
-
-    while drawn_card:
-        print (drawn_card, starting_deck[drawn_card])
-
-        drawn_card = draw_card()
-
-process_deck()
+    def draw_card(self):
+        return self.__cards.pop(0)
+    
+    def initial_draw(self):
+        return [self.draw_card(), self.draw_card()]

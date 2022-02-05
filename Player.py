@@ -1,6 +1,7 @@
 class Player:
     def __init__(self):
         self.__destination_cards = []
+        self.__transportation_cards = []
     
     def draw_destination_cards(self, deck):
         self.__destination_cards = deck.draw()
@@ -30,3 +31,9 @@ class Player:
         else:
             for card in self.__destination_cards:
                 print(card)
+    
+    def initialize_transportation_cards(self, deck):
+        self.__transportation_cards.extend(deck.initial_draw())
+    
+    def print_transportation_cards(self):
+        print(self.__transportation_cards)

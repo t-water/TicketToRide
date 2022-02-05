@@ -1,4 +1,5 @@
 from DestinationCards import DestinationCardDeck
+from TransportationCards import TransportationCardDeck
 from Player import Player
 
 def get_num_players():
@@ -18,13 +19,17 @@ def get_num_players():
 def game():
     num_players = get_num_players()
     players = [Player() for x in range(num_players)]
-    deck = DestinationCardDeck()
+    destination_card_deck = DestinationCardDeck()
+    transportation_card_deck = TransportationCardDeck()
 
     for player in players:
-        player.draw_destination_cards(deck)
+        player.initialize_transportation_cards(transportation_card_deck)
 
     for player in players:
-        player.confirm_destination_cards(deck)
+        player.draw_destination_cards(destination_card_deck)
+
+    for player in players:
+        player.confirm_destination_cards(destination_card_deck)
 
     for player in players:
         player.print_destination_cards()
