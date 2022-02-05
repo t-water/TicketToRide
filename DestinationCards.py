@@ -19,12 +19,14 @@ class DestinationCardDeck:
             for row in card_reader:
                 entries = row[0].split(',')
                 self.__cards.append(DestinationCard(entries[0], entries[1], entries[2]))
-    
-    def __remove_random_card(self):
-        i = random.randrange(len(self.__cards))
-        self.__cards[i], self.__cards[-1] = self.__cards[-1], self.__cards[i]
-
-        return self.__cards.pop()
+        
+        random.shuffle(self.__cards)
     
     def draw(self):
-        return [self.__remove_random_card(), self.__remove_random_card()]
+        if len(self.__cards) == 1:
+            return [self.__cards.pop()]
+        else:
+            return [self.__cards.pop(), self.__cards.pop()]
+    
+    def return_card(self, card):
+        self.__cards.append(card)
