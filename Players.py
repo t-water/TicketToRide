@@ -1,11 +1,8 @@
 from Player import Player
 
 class Players:
-    def __init__(self, numPlayers):
-        if numPlayers <= 0:
-            numPlayers = 1
-        
-        self.__players = [Player() for x in range(numPlayers)]
+    def __init__(self, numPlayers):        
+        self.__players = [Player() for _ in range(numPlayers)]
     
     def __loop_players(self, func, *args):
         for player in self.__players:
