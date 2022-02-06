@@ -18,13 +18,12 @@ def get_num_players():
 
 def game():
     num_players = get_num_players()
-    
-    players = Players(num_players)
     destination_card_deck = DestinationCardDeck()
     transportation_card_deck = TransportationCardDeck()
+    players = Players(num_players, destination_card_deck, transportation_card_deck)
 
-    players.initialize_transportation_cards(transportation_card_deck)
-    players.draw_destination_cards(destination_card_deck)
+    players.initialize_transportation_cards()
+    players.draw_destination_cards()
 
     players.take_turns()
 

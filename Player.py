@@ -1,21 +1,20 @@
-import numbers
-
-
 class Player:
-    def __init__(self):
-        self.__destination_cards = []
-        self.__transportation_cards = []
+    def __init__(self, destination_card_deck, transportation_card_deck):
+        self.__destination_card_deck = destination_card_deck
+        self.__transportation_card_deck= transportation_card_deck
+        self.__player_destination_cards = []
+        self.__player_transportation_cards = []
         self.__points = 0
-        self.__num_busess = 16
+        self.__num_busses = 16
     
-    def draw_destination_cards(self, deck):
-        self.__destination_cards = deck.draw()
+    def draw_destination_cards(self):
+        self.__player_destination_cards = self.__destination_card_deck.draw()
 
-    def confirm_destination_cards(self, deck):
-        card_len = len(self.__destination_cards)
+    def confirm_destination_cards(self):
+        card_len = len(self.__player_destination_cards)
 
         for i in range(card_len):
-            print (str(i) + ': give back ' + str(self.__destination_cards[i]))
+            print (str(i) + ': give back ' + str(self.__player_destination_cards[i]))
         
         print(str(card_len) + ': keep all cards')
 
@@ -28,23 +27,29 @@ class Player:
                 print('Invalid value')
 
         if card_to_return < card_len:
-            deck.return_card(self.__destination_cards.pop(card_to_return))
+            self.__destination_card_deck.return_card(self.__player_destination_cards.pop(card_to_return))
 
     def print_destination_cards(self):
-        if len(self.__destination_cards) == 0:
+        if len(self.__player_destination_cards) == 0:
             print ('No destination cards currently')
         else:
-            for card in self.__destination_cards:
+            for card in self.__player_destination_cards:
                 print(card)
     
-    def initialize_transportation_cards(self, deck):
-        self.__transportation_cards.extend(deck.initial_draw())
+    def initialize_transportation_cards(self):
+        self.__player_transportation_cards.extend(self.__transportation_card_deck.initial_deal())
     
     def print_transportation_cards(self):
-        print(self.__transportation_cards)
+        print(self.__player_transportation_cards)
     
     def get_num_busses(self):
-        return self.__num_busess
+        return self.__num_busses
     
-    def use_busses(self, num_busses_to_use):
-        self.__num_busess = max(0, self.__num_busess - num_busses_to_use)
+    def take_turn(self):
+        if self.__transportation_card_deck.can_take_turn():
+            print('0: Take a transportation card')
+        
+        user_choice = int(input())
+
+        transportation_cards_obtained = self.__transportation_card_deck.take_turn()
+        self.__player_transportation_cards.extend(transportation_cards_obtained)
