@@ -17,7 +17,9 @@ class TransportationCardDeck:
 
                 self.__cards.extend([entry[0]] * int(entry[1]))
             
-            random.shuffle(self.__cards)
+        random.shuffle(self.__cards)
+        
+        self.flop()
 
     def draw_card(self):
         return self.__cards.popleft()
@@ -38,6 +40,6 @@ class TransportationCardDeck:
             self.__discard_pile.extend(self.__flop)
             self.__flop.clear()
             self.__flop.extend(self.draw_cards(5))
-
+    
+    def print_flop(self):
         print(self.__flop)
-        print(self.__discard_pile)

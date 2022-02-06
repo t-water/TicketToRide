@@ -1,7 +1,12 @@
+import numbers
+
+
 class Player:
     def __init__(self):
         self.__destination_cards = []
         self.__transportation_cards = []
+        self.__points = 0
+        self.__num_busess = 16
     
     def draw_destination_cards(self, deck):
         self.__destination_cards = deck.draw()
@@ -37,3 +42,9 @@ class Player:
     
     def print_transportation_cards(self):
         print(self.__transportation_cards)
+    
+    def get_num_busses(self):
+        return self.__num_busess
+    
+    def use_busses(self, num_busses_to_use):
+        self.__num_busess = max(0, self.__num_busess - num_busses_to_use)

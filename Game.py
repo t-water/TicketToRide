@@ -26,6 +26,6 @@ def game():
     players.initialize_transportation_cards(transportation_card_deck)
     players.draw_destination_cards(destination_card_deck)
 
-    transportation_card_deck.flop()
+    players.take_turns()
 
 game()
