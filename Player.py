@@ -53,3 +53,4 @@ class Player:
 
         transportation_cards_obtained = self.__transportation_card_deck.take_turn()
         self.__player_transportation_cards.extend(transportation_cards_obtained)
+        print(self.__player_transportation_cards)
