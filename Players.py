@@ -1,8 +1,8 @@
 from Player import Player
 
 class Players:
-    def __init__(self, numPlayers, destination_card_deck, transportation_card_deck):        
-        self.__players = [Player(destination_card_deck, transportation_card_deck) for _ in range(numPlayers)]
+    def __init__(self, numPlayers, destination_card_deck, transportation_card_deck, board):        
+        self.__players = [Player(destination_card_deck, transportation_card_deck, board) for _ in range(numPlayers)]
         self.__turns = 0
     
     def __loop_players(self, func, *args):

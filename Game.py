@@ -1,3 +1,4 @@
+from Board import Board
 from DestinationCards import DestinationCardDeck
 from TransportationCards import TransportationCardDeck
 from Players import Players
@@ -20,7 +21,8 @@ def game():
     num_players = get_num_players()
     destination_card_deck = DestinationCardDeck()
     transportation_card_deck = TransportationCardDeck()
-    players = Players(num_players, destination_card_deck, transportation_card_deck)
+    board = Board()
+    players = Players(num_players, destination_card_deck, transportation_card_deck, board)
 
     players.initialize_transportation_cards()
     players.draw_destination_cards()

@@ -1,6 +1,37 @@
 import csv
 import heapq
 
+from Route import Route
+
+class Board:
+    def __init__(self):
+        self.__routes = []
+
+        with open('Board.csv', newline='') as csv_file:
+            board_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
+            for row in board_reader:
+                entries = row[0].split(',')
+
+                v1 = entries[0]
+                v2 = entries[1]
+                color = entries[2]
+                length = int(entries[3])
+
+                self.__routes.append(Route(v1, v2, color, length))
+    
+    def __get_unclaimed_routes(self):
+        return [route for route in self.__routes if not route.is_claimed()]
+    
+    def can_take_turn(self):
+        return len(self.__get_unclaimed_routes()) > 0
+    
+    def take_turn(self, player_transportation_cards):
+        
+
+        print([str(route) for route in self.__get_unclaimed_routes() if route.can_claim(player_transportation_cards)])
+
+        return 0
+
 def build_board():
     adj_list = {}
 

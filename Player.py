@@ -1,11 +1,12 @@
 class Player:
-    def __init__(self, destination_card_deck, transportation_card_deck):
+    def __init__(self, destination_card_deck, transportation_card_deck, board):
         self.__destination_card_deck = destination_card_deck
         self.__transportation_card_deck= transportation_card_deck
         self.__player_destination_cards = []
         self.__player_transportation_cards = []
         self.__points = 0
         self.__num_busses = 16
+        self.__board = board
     
     def draw_destination_cards(self):
         self.__player_destination_cards = self.__destination_card_deck.draw()
@@ -49,8 +50,14 @@ class Player:
         if self.__transportation_card_deck.can_take_turn():
             print('0: Take a transportation card')
         
+        if self.__board.can_take_turn():
+            print('1: Claim a route')
+        
         user_choice = int(input())
 
-        transportation_cards_obtained = self.__transportation_card_deck.take_turn()
-        self.__player_transportation_cards.extend(transportation_cards_obtained)
-        print(self.__player_transportation_cards)
+        if user_choice == 0:
+            transportation_cards_obtained = self.__transportation_card_deck.take_turn()
+            self.__player_transportation_cards.extend(transportation_cards_obtained)
+        else:
+            points_earned = self.__board.take_turn(self.__player_transportation_cards)
+            self.__points += points_earned
